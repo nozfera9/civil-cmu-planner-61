@@ -30,6 +30,9 @@
                 <button onclick="runAIAnalysis()" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-semibold shadow-sm transition-colors text-sm flex items-center gap-2 animate-pulse hover:animate-none">
                     🤖 AI วิเคราะห์แผน (Gemini)
                 </button>
+                <button onclick="copyAIPrompt()" class="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 font-semibold shadow-sm transition-colors text-sm flex items-center gap-2">
+                    📋 คัดลอก Prompt
+                </button>
                 <button onclick="changeApiKey()" class="px-3 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 text-xs font-semibold" title="เปลี่ยน Gemini API Key">
                     🔑 ตั้งค่า Key
                 </button>
@@ -110,64 +113,63 @@
             { id: "MATH 161", code: "206161", name: "Calculus for Engineering 1", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "MATH 162", code: "206162", name: "Calculus for Engineering 2", credit: 3, prereqs: ["MATH 161"], term: "ปี 1 เทอม 2", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "MATH 261", code: "206261", name: "Calculus for Engineering 3", credit: 3, prereqs: ["MATH 162"], term: "ปี 2 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "PHYS 105", code: "207105", name: "Physics for Engr and Agro-Industry Students 1", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "PHYS 115", code: "207115", name: "Physics Lab for Engr and Agro-Industry Students 1", credit: 1, prereqs: [], note: "Co-requisite: PHYS 105", term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "PHYS 106", code: "207106", name: "Physics for Engr and Agro-Industry Students 2", credit: 3, prereqs: ["PHYS 105"], term: "ปี 1 เทอม 2", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "PHYS 116", code: "207116", name: "Physics Lab for Engr and Agro-Industry Students 2", credit: 1, prereqs: [], note: "Co-requisite: PHYS 106", term: "ปี 1 เทอม 2", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CHEM 162", code: "203162", name: "General Chemistry for Engineering Students", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CHEM 167", code: "203167", name: "General Chemistry Laboratory for Engr Students", credit: 1, prereqs: [], note: "Co-requisite: CHEM 162", term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "GEOL 275", code: "205275", name: "Geology for Engineers", credit: 3, prereqs: [], term: "ปี 2 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "STAT 263", code: "208263", name: "Elementary Statistics", credit: 3, prereqs: [], term: "ปี 2 เทอม 2", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "PHYS 105", code: "207105", name: "Physics 1", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "PHYS 115", code: "207115", name: "Physics Lab 1", credit: 1, prereqs: [], note: "Co-requisite: PHYS 105", term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "PHYS 106", code: "207106", name: "Physics 2", credit: 3, prereqs: ["PHYS 105"], term: "ปี 1 เทอม 2", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "PHYS 116", code: "207116", name: "Physics Lab 2", credit: 1, prereqs: [], note: "Co-requisite: PHYS 106", term: "ปี 1 เทอม 2", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CHEM 162", code: "203162", name: "Chemistry", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CHEM 167", code: "203167", name: "Chemistry Lab", credit: 1, prereqs: [], note: "Co-requisite: CHEM 162", term: "ปี 1 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "GEOL 275", code: "205275", name: "Engr Geology", credit: 3, prereqs: [], term: "ปี 2 เทอม 1", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "STAT 263", code: "208263", name: "Statistics", credit: 3, prereqs: [], term: "ปี 2 เทอม 2", category: categoryOrder[1], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "ENGR 104", code: "259104", name: "Engineering Drawing", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[2], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "ENGR 106", code: "259106", name: "Workshop Technology", credit: 1, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[2], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 100", code: "251100", name: "Introduction to Civil Engineering", credit: 1, prereqs: [], term: "ปี 1 เทอม 2", category: categoryOrder[3], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 100", code: "251100", name: "Intro to Civil Engr", credit: 1, prereqs: [], term: "ปี 1 เทอม 2", category: categoryOrder[3], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "ENGR 103", code: "259103", name: "Engineering Materials", credit: 3, prereqs: [], term: "ปี 1 เทอม 2", category: categoryOrder[2], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGR 201", code: "259201", name: "Computer Programming for Engineers", credit: 3, prereqs: [], term: "ปี 2 เทอม 1", category: categoryOrder[2], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 292", code: "251292", name: "Mathematical Application and Diff. Equation for CE", credit: 3, prereqs: ["MATH 261", "ENGR 201"], term: "ปี 2 เทอม 2", category: categoryOrder[6], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGR 107", code: "259107", name: "Engineering Mechanics 1", credit: 3, prereqs: ["MATH 161", "PHYS 105"], term: "ปี 1 เทอม 2", category: categoryOrder[2], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGR 201", code: "259201", name: "Computer Programming", credit: 3, prereqs: [], term: "ปี 2 เทอม 1", category: categoryOrder[2], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 292", code: "251292", name: "Math Application for CE", credit: 3, prereqs: ["MATH 261", "ENGR 201"], term: "ปี 2 เทอม 2", category: categoryOrder[6], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGR 107", code: "259107", name: "Engr Mech 1 (Statics)", credit: 3, prereqs: ["MATH 161", "PHYS 105"], term: "ปี 1 เทอม 2", category: categoryOrder[2], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
             { id: "CE 211", code: "251211", name: "Strength of Materials 1", credit: 3, prereqs: ["ENGR 107"], term: "ปี 2 เทอม 1", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
             { id: "CE 213", code: "251213", name: "Theory of Structures", credit: 3, prereqs: ["CE 211"], term: "ปี 2 เทอม 2", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 216", code: "251216", name: "Structural Materials and Testing", credit: 4, prereqs: ["CE 211", "ENGR 103"], term: "ปี 2 เทอม 2", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 216", code: "251216", name: "Struct & Mat Testings", credit: 4, prereqs: ["CE 211", "ENGR 103"], term: "ปี 2 เทอม 2", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
             { id: "CE 312", code: "251312", name: "Structural Analysis", credit: 3, prereqs: ["CE 213"], term: "ปี 3 เทอม 1", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 313", code: "251313", name: "Reinforced Concrete Design", credit: 4, prereqs: ["CE 312"], term: "ปี 3 เทอม 2", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 411", code: "251411", name: "Timber and Steel Design", credit: 4, prereqs: ["CE 312"], term: "ปี 4 เทอม 1", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 313", code: "251313", name: "RC Design", credit: 4, prereqs: ["CE 312"], term: "ปี 3 เทอม 2", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 411", code: "251411", name: "Timber & Steel Design", credit: 4, prereqs: ["CE 312"], term: "ปี 4 เทอม 1", category: categoryOrder[3], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
             { id: "CE 261", code: "251261", name: "Hydraulics", credit: 3, prereqs: ["ENGR 107"], term: "ปี 2 เทอม 2", category: categoryOrder[4], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 361", code: "251361", name: "Hydraulics Laboratory", credit: 1, prereqs: [], note: "Co-requisite: CE 261", term: "ปี 3 เทอม 1", category: categoryOrder[4], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 363", code: "251363", name: "Engineering Hydrology", credit: 3, prereqs: ["CE 261"], term: "ปี 3 เทอม 1", category: categoryOrder[4], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 361", code: "251361", name: "Hydraulics Lab", credit: 1, prereqs: [], note: "Co-requisite: CE 261", term: "ปี 3 เทอม 1", category: categoryOrder[4], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 363", code: "251363", name: "Hydrology", credit: 3, prereqs: ["CE 261"], term: "ปี 3 เทอม 1", category: categoryOrder[4], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "CE 371", code: "251371", name: "Soil Mechanics", credit: 3, prereqs: ["CE 211", "GEOL 275"], term: "ปี 3 เทอม 1", category: categoryOrder[4], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 372", code: "251372", name: "Engineering Soil Tests", credit: 1, prereqs: [], note: "Co-requisite: CE 371", term: "ปี 3 เทอม 1", category: categoryOrder[4], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 374", code: "251374", name: "Foundation Engineering and Practices", credit: 3, prereqs: ["CE 371"], term: "ปี 3 เทอม 2", category: categoryOrder[4], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 461", code: "251461", name: "Hydraulic Engineering", credit: 3, prereqs: [], term: "ปี 4 เทอม 1", category: categoryOrder[4], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 343", code: "251343", name: "Survey for Civil Engineering", credit: 4, prereqs: ["ENGR 104"], note: "รวม Survey Camp", term: "ปี 3 เทอม 2", category: categoryOrder[5], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 372", code: "251372", name: "Soil Mechanics Lab", credit: 1, prereqs: [], note: "Co-requisite: CE 371", term: "ปี 3 เทอม 1", category: categoryOrder[4], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 374", code: "251374", name: "Foundation Engineering", credit: 3, prereqs: ["CE 371"], term: "ปี 3 เทอม 2", category: categoryOrder[4], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 461", code: "251461", name: "Hydraulics Engineering", credit: 3, prereqs: [], term: "ปี 4 เทอม 1", category: categoryOrder[4], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 343", code: "251343", name: "Survey for Civil Engr", credit: 4, prereqs: ["ENGR 104"], note: "รวม Survey Camp", term: "ปี 3 เทอม 2", category: categoryOrder[5], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
             { id: "CE 333", code: "251333", name: "Highway Engineering", credit: 3, prereqs: ["CE 343"], term: "ปี 3 เทอม 2", category: categoryOrder[5], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 334", code: "251334", name: "Highway Engineering Laboratory", credit: 1, prereqs: [], note: "Co-requisite: CE 333", term: "ปี 3 เทอม 2", category: categoryOrder[5], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 451", code: "251451", name: "Construction Techniques and Management", credit: 3, prereqs: ["CE 313"], term: "ปี 4 เทอม 2", category: categoryOrder[5], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGR 191", code: "259191", name: "Principle of Being Professional", credit: 1, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGR 194", code: "259194", name: "Characteristics and Values for Being a Professional Entrepreneur", credit: 1, prereqs: [], term: "ปี 3 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 400", code: "251400", name: "Training in Civil Engineering", credit: 3, prereqs: [], note: "Pre-requisite: Consent", term: "ปี 3 ภาคฤดูร้อน", category: categoryOrder[6], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "CE 499", code: "251499", name: "Civil Engineering Project", credit: 3, prereqs: [], note: "Pre-requisite: Consent", term: "ปี 4 เทอม 1", category: categoryOrder[6], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGR 192", code: "259192", name: "Skills for Professionalism and Entrepreneurship", credit: 1, prereqs: [], term: "ปี 4 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 334", code: "251334", name: "Highway Engineering Lab", credit: 1, prereqs: [], note: "Co-requisite: CE 333", term: "ปี 3 เทอม 2", category: categoryOrder[5], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 451", code: "251451", name: "Construction Tech & Mng", credit: 3, prereqs: ["CE 313"], term: "ปี 4 เทอม 2", category: categoryOrder[5], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGR 191", code: "259191", name: "Student Activities 1", credit: 1, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGR 194", code: "259194", name: "Student Activities", credit: 1, prereqs: [], term: "ปี 3 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 400", code: "251400", name: "Regular Training", credit: 3, prereqs: [], note: "Pre-requisite: Consent", term: "ปี 3 ภาคฤดูร้อน", category: categoryOrder[6], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "CE 499", code: "251499", name: "CE Project", credit: 3, prereqs: [], note: "Pre-requisite: Consent", term: "ปี 4 เทอม 1", category: categoryOrder[6], isCritical: true, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGR 192", code: "259192", name: "Student Activities 2", credit: 1, prereqs: [], term: "ปี 4 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "PG 104", code: "140104", name: "Citizenship", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGL 101", code: "001101", name: "Fundamental English 1", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGL 102", code: "001102", name: "Fundamental English 2", credit: 3, prereqs: ["ENGL 101"], term: "ปี 1 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGL 201", code: "001201", name: "Critical Reading and Effective Writing", credit: 3, prereqs: ["ENGL 102"], term: "ปี 2 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "ENGL 225", code: "001225", name: "English in Science and Technology Context", credit: 3, prereqs: ["ENGL 201"], term: "ปี 2 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGL 101", code: "001101", name: "Fund English 1", credit: 3, prereqs: [], term: "ปี 1 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGL 102", code: "001102", name: "Fund English 2", credit: 3, prereqs: ["ENGL 101"], term: "ปี 1 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGL 201", code: "001201", name: "Read & Write English", credit: 3, prereqs: ["ENGL 102"], term: "ปี 2 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
+            { id: "ENGL 225", code: "001225", name: "Sci & Tech English", credit: 3, prereqs: ["ENGL 201"], term: "ปี 2 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
             { id: "SE 111", code: "953111", name: "Software for Everyday Life", credit: 3, prereqs: [], term: "ปี 3 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", plannedTerm: "" },
-            { id: "GE ELEC (Innovative)", code: "-", name: "เลือก 1 วิชา: PSY110/LAGE100/MGMT103/ECON100", credit: 3, prereqs: [], term: "ปี 1 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
+            { id: "GE ELEC (Innovative)", code: "-", name: "วิชาเลือก GE กลุ่มนวัตกรรม", credit: 3, prereqs: [], term: "ปี 1 เทอม 2", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
             { id: "FREE ELEC #1", code: "-", name: "Free Elective #1", credit: 3, prereqs: [], term: "ปี 2 เทอม 1", category: categoryOrder[8], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
-            { id: "GE ELEC #1", code: "-", name: "วิชาเลือก GE กลุ่ม Learner Person / Active Citizen", credit: 3, prereqs: [], term: "ปี 2 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
-            { id: "GE ELEC #2", code: "-", name: "วิชาเลือก GE กลุ่ม Learner Person / Active Citizen", credit: 3, prereqs: [], term: "ปี 3 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
+            { id: "GE ELEC #1", code: "-", name: "วิชาเลือก GE", credit: 3, prereqs: [], term: "ปี 2 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
+            { id: "GE ELEC #2", code: "-", name: "วิชาเลือก GE", credit: 3, prereqs: [], term: "ปี 3 เทอม 1", category: categoryOrder[0], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
             { id: "FREE ELEC #2", code: "-", name: "Free Elective #2", credit: 3, prereqs: [], term: "ปี 3 เทอม 1", category: categoryOrder[8], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
             { id: "MAJOR ELEC #1", code: "CE 4xx", name: "Major Elective", credit: 3, prereqs: [], term: "ปี 4 เทอม 1", category: categoryOrder[7], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
             { id: "MAJOR ELEC #2", code: "CE 4xx", name: "Major Elective", credit: 3, prereqs: [], term: "ปี 4 เทอม 2", category: categoryOrder[7], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" },
             { id: "MAJOR ELEC #3", code: "CE 4xx", name: "Major Elective", credit: 3, prereqs: [], term: "ปี 4 เทอม 2", category: categoryOrder[7], isCritical: false, status: "pending", grade: "-", isElective: true, customCode: "", customName: "", plannedTerm: "" }
         ];
 
-        let courses = JSON.parse(localStorage.getItem('cmuCivilPlannerV20')) || JSON.parse(JSON.stringify(defaultCourses));
+        let courses = JSON.parse(localStorage.getItem('cmuCivilPlannerV22')) || JSON.parse(localStorage.getItem('cmuCivilPlannerV21')) || JSON.parse(JSON.stringify(defaultCourses));
         
         courses = courses.map(c => {
             let def = defaultCourses.find(d => d.id === c.id);
-            // category/credit มาจากโครงสร้างหลักสูตร ให้ยึดตาม defaultCourses เสมอ ไม่ใช่ค่าที่ค้างจากเวอร์ชันเก่า
             c.category = def ? def.category : categoryOrder[8];
             c.credit = def ? def.credit : (c.credit || 3);
             if(c.plannedTerm === undefined) c.plannedTerm = "";
@@ -177,7 +179,7 @@
         const grades = ["-", "A", "B+", "B", "C+", "C", "D+", "D", "F", "W", "S", "U", "P"];
 
         function saveToStorage() {
-            localStorage.setItem('cmuCivilPlannerV20', JSON.stringify(courses));
+            localStorage.setItem('cmuCivilPlannerV22', JSON.stringify(courses));
         }
 
         function getApiKey() {
@@ -206,50 +208,7 @@
             modal.classList.remove('hidden');
             content.innerHTML = '<div class="flex items-center gap-3 text-purple-600 font-semibold p-4"><svg class="animate-spin h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg> กำลังส่งข้อมูลให้ Gemini AI วิเคราะห์แผนการเรียนของคุณ กรุณารอสักครู่...</div>';
 
-            let totalCr = 0, passedCr = 0, enrolledCr = 0;
-            let enrolledList = [], unlockedList = [], lockedList = [];
-
-            courses.forEach(c => {
-                totalCr += c.credit;
-                if (c.status === 'passed') passedCr += c.credit;
-                else if (c.status === 'enrolled') {
-                    enrolledCr += c.credit;
-                    enrolledList.push(`- ${getDisplayCode(c)} ${getDisplayName(c)} (${c.credit} หน่วยกิต)`);
-                } else {
-                    if (isPrereqMet(c.prereqs)) {
-                        unlockedList.push(`- ${getDisplayCode(c)} ${getDisplayName(c)} (${c.credit} หน่วยกิต)`);
-                    } else {
-                        let missing = c.prereqs.filter(pId => {
-                            let p = courses.find(x => x.id === pId);
-                            return !p || p.status !== 'passed';
-                        });
-                        lockedList.push(`- ${c.id} (ติดเงื่อนไขต้องผ่าน: ${missing.join(', ')})`);
-                    }
-                }
-            });
-
-            const promptText = `คุณคือที่ปรึกษาทางวิชาการภาควิชาวิศวกรรมโยธา มหาวิทยาลัยเชียงใหม่ 
-ช่วยวิเคราะห์สถานะการเรียนและวางแผนการลงทะเบียนให้ฉันหน่อย (ฉันกำลังเรียนนอกแผนปกติ):
-
-📊 ภาพรวมปัจจุบัน:
-- หน่วยกิตที่เก็บได้แล้ว: ${passedCr} / ${totalCr}
-- หน่วยกิตที่กำลังเรียนเทอมนี้: ${enrolledCr}
-
-📝 วิชาที่กำลังเรียนอยู่เทอมนี้:
-${enrolledList.length > 0 ? enrolledList.join('\n') : '- ไม่มี'}
-
-🟢 วิชาที่ปลดล็อคแล้ว (สามารถลงเรียนเทอมหน้าได้):
-${unlockedList.length > 0 ? unlockedList.join('\n') : '- ไม่มี'}
-
-🔒 วิชาบังคับที่ยังติดเงื่อนไข (ลงไม่ได้):
-${lockedList.length > 0 ? lockedList.join('\n') : '- ไม่มี'}
-
-คำสั่ง:
-1. ประเมินความหนักของเทอมนี้ให้หน่อย (วิชาคำนวณ/ปฏิบัติการเยอะไหม)
-2. แนะนำ "ตารางเรียนสำหรับเทอมถัดไป" ให้ชัดเจน โดยหยิบวิชาจากกลุ่ม "ปลดล็อคแล้ว" มาจัดให้เหมาะสม (รวมประมาณ 15-18 หน่วยกิต) เน้นวิชาที่เป็นตัวต่อ (Critical Chain) ก่อนเพื่อไม่ให้ติดล็อคในปีถัดไป
-3. ให้คำแนะนำเพิ่มเติมในการเก็บวิชาที่เหลือให้จบตามเป้าหมาย
-
-ตอบเป็นภาษาไทยด้วยน้ำเสียงให้กำลังใจ เป็นมืออาชีพ และจัดหัวข้อให้อ่านง่าย`;
+            const promptText = buildPromptText();
 
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`, {
@@ -270,6 +229,77 @@ ${lockedList.length > 0 ? lockedList.join('\n') : '- ไม่มี'}
             } catch (err) {
                 content.innerHTML = `<div class="p-4 bg-red-50 text-red-600 rounded-lg"><b>เกิดข้อผิดพลาด:</b> ${err.message}<br><br><span class="text-xs">แนะนำให้ตรวจสอบว่าเปิดใช้ API Key จาก Google AI Studio ถูกต้องหรือไม่ครับ</span></div>`;
             }
+        }
+
+        // --- ฟังก์ชันสำหรับคัดลอก Prompt เอาไปใช้ข้างนอก ---
+        function copyAIPrompt() {
+            const promptText = buildPromptText();
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert("📋 คัดลอก Prompt สำเร็จ!\n\nคุณสามารถนำข้อความนี้ไปกด 'วาง (Paste)' ในหน้าแชทของ Gemini, ChatGPT หรือ Claude เพื่อให้ AI ช่วยวิเคราะห์ได้เลยครับ");
+            }).catch(err => {
+                alert("คัดลอกไม่สำเร็จ รบกวนลองใหม่อีกครั้งครับ: " + err);
+            });
+        }
+
+        // ฟังก์ชันสร้างข้อความ Prompt กลาง
+        function buildPromptText() {
+            let totalCr = 0, passedCr = 0, enrolledCr = 0;
+            let enrolledList = [], unlockedList = [], lockedList = [], plannedList = [];
+
+            courses.forEach(c => {
+                totalCr += c.credit;
+                if (c.status === 'passed') {
+                    passedCr += c.credit;
+                } else if (c.status === 'enrolled') {
+                    enrolledCr += c.credit;
+                    enrolledList.push(`- ${getDisplayCode(c)} ${getDisplayName(c)} (${c.credit} หน่วยกิต)`);
+                } else {
+                    let planText = c.plannedTerm ? ` [แพลนไว้เทอม: ${c.plannedTerm}]` : '';
+                    if (c.plannedTerm) {
+                        plannedList.push(`- เทอม ${c.plannedTerm}: ${getDisplayCode(c)} ${getDisplayName(c)} (${c.credit} นก.)`);
+                    }
+
+                    if (isPrereqMet(c.prereqs)) {
+                        unlockedList.push(`- ${getDisplayCode(c)} ${getDisplayName(c)} (${c.credit} หน่วยกิต)${planText}`);
+                    } else {
+                        let missing = c.prereqs.filter(pId => {
+                            let p = courses.find(x => x.id === pId);
+                            return !p || p.status !== 'passed';
+                        });
+                        lockedList.push(`- ${c.id} (ติดเงื่อนไขต้องผ่าน: ${missing.join(', ')})${planText}`);
+                    }
+                }
+            });
+
+            // เรียงลำดับ plannedList ตามเทอม
+            plannedList.sort();
+
+            return `คุณคือที่ปรึกษาทางวิชาการภาควิชาวิศวกรรมโยธา มหาวิทยาลัยเชียงใหม่ 
+ช่วยวิเคราะห์สถานะการเรียนและวางแผนการลงทะเบียนให้ฉันหน่อย:
+
+📊 ภาพรวมปัจจุบัน:
+- หน่วยกิตที่เก็บได้แล้ว: ${passedCr} / ${totalCr}
+- หน่วยกิตที่กำลังเรียนเทอมนี้: ${enrolledCr}
+
+📝 วิชาที่กำลังเรียนอยู่เทอมนี้:
+${enrolledList.length > 0 ? enrolledList.join('\n') : '- ไม่มี'}
+
+🎯 แผนการเรียนที่ฉันวางไว้ล่วงหน้า (My Plan):
+${plannedList.length > 0 ? plannedList.join('\n') : '- ยังไม่ได้ระบุ'}
+
+🟢 วิชาที่ปลดล็อคแล้ว (สามารถลงเรียนเทอมหน้าได้):
+${unlockedList.length > 0 ? unlockedList.join('\n') : '- ไม่มี'}
+
+🔒 วิชาบังคับที่ยังติดเงื่อนไข (ลงไม่ได้):
+${lockedList.length > 0 ? lockedList.join('\n') : '- ไม่มี'}
+
+คำสั่ง:
+1. ประเมินความหนักของเทอมนี้ให้หน่อย (วิชาคำนวณ/ปฏิบัติการเยอะไหม)
+2. ช่วยรีวิว "แผนการเรียนที่ฉันวางไว้ล่วงหน้า" ว่าเหมาะสมไหม มีเทอมไหนหนักเกินไป หรือมีวิชาตัวต่อ (Critical Chain) ไหนที่ควรขยับมาเรียนก่อนไหม
+3. แนะนำ "ตารางเรียนสำหรับเทอมถัดไป" เพิ่มเติมให้ครบ 15-18 หน่วยกิต (ถ้าในแพลนยังมีไม่ถึง)
+4. ให้คำแนะนำเพิ่มเติมในการเก็บวิชาที่เหลือให้จบตามเป้าหมาย
+
+ตอบเป็นภาษาไทยด้วยน้ำเสียงให้กำลังใจ เป็นมืออาชีพ และจัดหัวข้อให้อ่านง่าย`;
         }
 
         function closeModal() {
@@ -387,7 +417,7 @@ ${lockedList.length > 0 ? lockedList.join('\n') : '- ไม่มี'}
 
         function resetData() {
             if(confirm("ล้างแผนการเรียนทั้งหมดและเริ่มใหม่?")) {
-                localStorage.removeItem('cmuCivilPlannerV20');
+                localStorage.removeItem('cmuCivilPlannerV22');
                 courses = JSON.parse(JSON.stringify(defaultCourses));
                 render();
             }
